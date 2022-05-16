@@ -15,7 +15,7 @@ function MyCourses() {
   const { user, theme, setMyCourses } = useStore();
 
   const token = localStorage.getItem("accessToken");
-  const { data, error, loading,refetch } = useQuery(getMyCourses, {
+  const { data, error, loading, refetch } = useQuery(getMyCourses, {
     context: {
       headers: {
         Authorization: token,
@@ -23,13 +23,11 @@ function MyCourses() {
     },
   });
 
-
   useEffect(() => {
-      setMyCourses(data?.getMyCourses);
-      refetch()
-  },[data]);
+    setMyCourses(data?.getMyCourses);
+    refetch();
+  }, [data]);
 
-  
   const mainContainerStyles = `px-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-16`;
   const btnSectionStyles = `px-2 h-[3rem] flex items-center ${
     theme ? "bg-slate-800" : null
@@ -38,12 +36,9 @@ function MyCourses() {
     theme ? "bg-slate-800" : null
   }`;
 
-
-
-
   return (
     <>
-      <ErrorBoundary>
+      <ErrorBoundary fallback={"Error"}>
         {user.role === "teacher" && (
           <nav className={btnSectionStyles}>
             <Link
@@ -59,9 +54,15 @@ function MyCourses() {
             data?.getMyCourses.map((a) => {
               console.log(a);
               return (
-                <CourseCard id={a?.id} enrolled={true} course={a} 
-                image={a?.image} category={a?.category} price={a?.price} 
-                name={a?.name} tagline={a?.tagline}
+                <CourseCard
+                  id={a?.id}
+                  enrolled={true}
+                  course={a}
+                  image={a?.image}
+                  category={a?.category}
+                  price={a?.price}
+                  name={a?.name}
+                  tagline={a?.tagline}
                 />
               );
             })

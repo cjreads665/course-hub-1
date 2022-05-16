@@ -11,7 +11,7 @@ import {
 } from "../../graphql/Mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import toast from "react-hot-toast";
-import noImagePlaceHolder from '../../images/noImagePlaceHolder.png'
+import noImagePlaceHolder from "../../images/noImagePlaceHolder.png";
 
 const CourseCard = ({ id, course, enrolled, inwishlist }) => {
   const { user, myWishlist, setMyWishlist } = useStore();
@@ -32,16 +32,18 @@ const CourseCard = ({ id, course, enrolled, inwishlist }) => {
             Authorization: token,
           },
         },
-      }).then((res)=>{
-        console.log("res",res);
-        toast.success("Course added into wishlist succesfully ! ");
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
-      }).catch((err)=>{
-        console.log("err",err);
-        toast.error("Course addition into wishlist failed ! ")
-      });
+      })
+        .then((res) => {
+          console.log("res", res);
+          toast.success("Course added into wishlist succesfully ! ");
+          setTimeout(() => {
+            location.reload();
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log("err", err);
+          toast.error("Course addition into wishlist failed ! ");
+        });
       setMyWishlist((val) => [...val, course?.id]);
     } catch (err) {
       console.log(err.message);
@@ -59,16 +61,18 @@ const CourseCard = ({ id, course, enrolled, inwishlist }) => {
             Authorization: token,
           },
         },
-      }).then((res)=>{
-        console.log("res",res);
-        toast.success("Course removed from wishlist succesfully ! ");
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
-      }).catch((err)=>{
-        console.log("err",err);
-        toast.error("Course removal from wishlist failed ! ")
-      });
+      })
+        .then((res) => {
+          console.log("res", res);
+          toast.success("Course removed from wishlist succesfully ! ");
+          setTimeout(() => {
+            location.reload();
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log("err", err);
+          toast.error("Course removal from wishlist failed ! ");
+        });
       let newData = myWishlist.filter((a) => a !== course.id);
       setMyWishlist(newData);
     } catch (err) {
@@ -78,7 +82,7 @@ const CourseCard = ({ id, course, enrolled, inwishlist }) => {
   };
 
   // useEffect(() => console.log(myWishlist));
-  console.log(course)
+  console.log(course);
   return (
     <ErrorBoundary fallback={"error in course page"}>
       <div className="rounded-sm h-[70%] relative w-[21rem] shadow-md overflow-hidden cursor-pointer border-4 border-grey shadow-2xl">
@@ -91,12 +95,18 @@ const CourseCard = ({ id, course, enrolled, inwishlist }) => {
         >
           <div className="h-[12rem] rounded-t-sm overflow-hidden relative before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[rgba(255,118,118,0.09)]">
             <img
-              src={course?.image=='IMG_20220321_121445.jpg' || course?.image==undefined || course?.image=='lukas-NLSXFjl_nhc-unsplash.jpg' ? noImagePlaceHolder : course?.image}
+              src={
+                course?.image == "IMG_20220321_121445.jpg" ||
+                course?.image == undefined ||
+                course?.image == "lukas-NLSXFjl_nhc-unsplash.jpg"
+                  ? noImagePlaceHolder
+                  : course?.image
+              }
               alt="course-image"
               className="object-cover w-full h-full"
             />
           </div>
-       {console.log(course.image=='IMG_20220321_121445.jpg')}
+          {console.log(course?.image == "IMG_20220321_121445.jpg")}
         </Link>
 
         <div className="relative px-8 py-10 bg-white text-slate-900 flex flex-col items-start gap-4">
@@ -128,9 +138,9 @@ const CourseCard = ({ id, course, enrolled, inwishlist }) => {
               <span>{course?.noOfSubscribers || 2000}</span>
             </div>
           </div>
-          <h3 className="leading-6 text-xl font-semibold h-12 text-slate-800">
-            {course?.tagline}
-          </h3>
+          {/* <h3 className="leading-6 text-xl font-semibold h-12 text-slate-800"> */}
+          {/*   {course?.tagline} */}
+          {/* </h3> */}
           <span className="absolute top-[-1.1rem] right-[1rem] bg-[#fc2340] px-4 py-1 rounded-sm text-white text-xl">
             <strong>
               ₹

@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { getChaptersQuery } from "../graphql/Queries";
 import BoxLoading from "../UI/BoxLoading";
 import { Search, Trash, PencilSquare } from "react-bootstrap-icons";
+import NavTabs from "./NavTabs";
 
 const PreviousChapter = () => {
   const { user, theme } = useStore();
@@ -26,7 +27,7 @@ const PreviousChapter = () => {
 
   useEffect(() => {
     if (getChapters.loading) return;
-    console.log(getChapters?.data?.chapters);
+    // console.log(getChapters?.data?.chapters);
     setChapters(getChapters?.data?.chapters);
   }, [getChapters.data]);
 
@@ -46,24 +47,8 @@ const PreviousChapter = () => {
   return (
     <>
       <div className={mainDivStyles}>
-        <nav className="flex gap-12 mb-8 bg-gray-200 text-[20px]">
-          <Link to={`/create-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 px-4 font-bold">New Chapter</h1>
-          </Link>
-          <Link to={`/previous-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 px-4 font-bold border-b-4 border-red-500">
-              Previous Chapters
-            </h1>
-          </Link>
-          <Link to={`/update-discount/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">Update Discount</h1>
-          </Link>
-           <Link to={`/benefits/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">
-              Benefits
-            </h1>
-          </Link>
-        </nav>
+        <NavTabs id={id} />
+
         <div className="bg-white w-full px-8 py-4">
           <div className="flex flex-col mt-4 border">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">

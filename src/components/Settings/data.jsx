@@ -31,15 +31,6 @@ export const data = [
     type: "number",
   },
   {
-    label: "password",
-    labelTitle: "Your Password",
-    img: <Lock />,
-    type: "password",
-    extra: {
-      disabled: true,
-    },
-  },
-  {
     label: "image",
     labelTitle: "Your Profile Image",
     img: <Image />,

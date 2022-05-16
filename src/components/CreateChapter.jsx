@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import NavTabs from "./NavTabs";
 
 const CreateChapter = () => {
   const { user, theme } = useStore();
@@ -38,17 +39,19 @@ const CreateChapter = () => {
         teacherId: user.id,
         courseId: id,
       },
-    }).then((res)=>{
-      setFormData({});
-      console.log("res",res);
-      toast.success("Chapter created succesfully ! ");
-      setTimeout(() => {
-        location.reload();
-      }, 3000);
-    }).catch((err)=>{
-      console.log("err",err);
-      toast.error("Chapter creation failed ! ")
-    });
+    })
+      .then((res) => {
+        setFormData({});
+        console.log("res", res);
+        toast.success("Chapter created succesfully ! ");
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        toast.error("Chapter creation failed ! ");
+      });
   };
 
   const handleFile = (e) => {
@@ -84,24 +87,8 @@ const CreateChapter = () => {
   return (
     <>
       <div className={mainDivStyles}>
-        <nav className="flex gap-12 mb-8 bg-gray-200 text-[20px]">
-          <Link to={`/create-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 px-4 font-bold border-b-4 border-red-500">
-              New Chapter
-            </h1>
-          </Link>
-          <Link to={`/previous-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">Previous Chapters</h1>
-          </Link>
-          <Link to={`/update-discount/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">Update Discount</h1>
-          </Link>
-                     <Link to={`/benefits/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">
-              Benefits
-            </h1>
-          </Link>
-        </nav>
+
+        <NavTabs id={id} />
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormControl
             onChange={handleChange}

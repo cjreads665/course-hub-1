@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Select, MenuItem } from "@material-ui/core";
+import NavTabs from "./NavTabs";
 
 const UpdateDiscount = () => {
   const { user, theme } = useStore();
@@ -48,17 +49,19 @@ const UpdateDiscount = () => {
             Authorization: token,
           },
         },
-      }).then((res)=>{
-        setFormData({ discountType: " " });
-        console.log("res",res);
-        toast.success("Discount updated succesfully ! ");
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
-      }).catch((err)=>{
-        console.log("err",err);
-        toast.error("Discount updation failed ! ")
-      });
+      })
+        .then((res) => {
+          setFormData({ discountType: " " });
+          console.log("res", res);
+          toast.success("Discount updated succesfully ! ");
+          setTimeout(() => {
+            location.reload();
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log("err", err);
+          toast.error("Discount updation failed ! ");
+        });
 
       // document.getElementById("myForm").reset();
     } catch (err) {
@@ -72,24 +75,7 @@ const UpdateDiscount = () => {
   return (
     <>
       <div className={mainDivStyles}>
-        <nav className="flex gap-12 text-[20px] mb-8 bg-gray-200">
-          <Link to={`/create-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 px-4 font-bold">New Chapter</h1>
-          </Link>
-          <Link to={`/previous-chapter/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">Previous Chapters</h1>
-          </Link>
-          <Link to={`/update-discount/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold border-b-4 border-red-500">
-              Update Discount
-            </h1>
-          </Link>
-          <Link to={`/benefits/${id}`}>
-            <h1 className="pb-2 pt-4 font-bold">
-              Benefits
-            </h1>
-          </Link>
-        </nav>
+        <NavTabs id={id} />
         <form onSubmit={handleSubmit} className="space-y-4" id="myForm">
           <FormControl
             label="discount"

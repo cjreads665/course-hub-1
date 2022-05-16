@@ -12,7 +12,9 @@ import {
   PrivateRoute,
   UpdateDiscount,
   PreviousChapter,
-  Benefits
+
+  StudentsEnrolledInCourse,
+  SendNotificationAllStudents,
 } from "./components";
 
 import {
@@ -110,12 +112,22 @@ function App() {
               <Route path="/community" element={<Community />} />
               <Route path="/create-course" element={<CreateCourse />} />
               <Route path="/create-chapter/:id" element={<CreateChapter />} />
-              <Route path="/update-discount/:id" element={<UpdateDiscount />} />
+
               <Route path="/benefits/:id" element={<Benefits/>} />
               <Route
                 path="/previous-chapter/:id"
                 element={<PreviousChapter />}
               />
+              <Route path="/update-discount/:id" element={<UpdateDiscount />} />
+              <Route
+                path="/students-enrolled-course/:id"
+                element={<StudentsEnrolledInCourse />}
+              />
+              <Route
+                path="/send-notification-students/:id"
+                element={<SendNotificationAllStudents />}
+              />
+
               <Route path="/create-quiz" element={<CreateQuiz />} />
               <Route path="/create-assignment" element={<CreateAssignment />} />
 
